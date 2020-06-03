@@ -13,8 +13,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
-handler = WebhookHandler('YOUR_CHANNEL_SECRET')
+line_bot_api = LineBotApi('CuzvEwcX102lW5EyIJv/BXXixlK6eMl0bXU6QS1RGLZl56dBgMojQj3hFf9xq4dczBZgQokDFG7Lc5gXk16n50QH9BK9r+n3U5iAYq7BF4vNJo8ClchVTLTVQ2cJOFQaus+DVd4Tf7Fcgd/fmYRZGwdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('2b68cd064176f3b957dd492aae378a8e')
 
 
 @app.route("/callback", methods=['POST'])
@@ -38,10 +38,19 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     """ Here's all the messages will be handled and processed by the program """
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
 
+    if "hallo" in msg:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=Hello apa kabar?))
+    elif "apa kabar" in msg:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=baik, alhamdulillah))
+    else :
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text))
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
